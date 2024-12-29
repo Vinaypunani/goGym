@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Pagination from '@mui/material/Pagination'
-import { Box,Stack,Button,Typography } from '@mui/material'
+import { Box, Stack, Button, Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import ExercisesCard from './ExercisesCard'
+import Loader from './Loader'
 
 const Exercises = () => {
-  const searchResult = useSelector((state)=>state.gym.searchResult)
-  const selectedCategorie = useSelector((state)=>state.gym.selectedCategorie)
+  const searchResult = useSelector((state) => state.gym.searchResult)
+  const loading = useSelector((state) => state.gym.loading)
+  const selectedCategorie = useSelector((state) => state.gym.selectedCategorie)
 
   const [currentPage, setCurrentPage] = useState(1)
   const exercisePerPage = 18
@@ -16,7 +18,7 @@ const Exercises = () => {
 
   const pageHeandler = (event, value) => {
     setCurrentPage(value)
-    window.scrollTo({top:1400, behavior: 'smooth'})
+    window.scrollTo({ top: 1400, behavior: 'smooth' })
   }
 
 
@@ -44,6 +46,7 @@ const Exercises = () => {
       <Box
         sx={{
           display: 'grid',
+          position:'relative',
           gridTemplateColumns: {
             lg: 'repeat(3, 1fr)',
             md: 'repeat(2, 1fr)',
@@ -53,9 +56,13 @@ const Exercises = () => {
         }}
       >
 
-        {searchResult.map((exercise, index) => (
-            <ExercisesCard key={index} exercise={exercise} />
-          )).splice(indexOfFirstExercise, exercisePerPage)
+
+        {
+          loading ? 
+            <Loader /> :
+            searchResult.map((exercise, index) => (
+              <ExercisesCard key={index} exercise={exercise} />
+            )).splice(indexOfFirstExercise, exercisePerPage)
         }
 
 

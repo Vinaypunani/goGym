@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import CategoryCard from './CategoryCard';
 import categoryLogo from '../assets/images/category.webp'
-import { setSelectedCategorie } from '../features/gym/gymSlice'
+import { setLoading, setSelectedCategorie } from '../features/gym/gymSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Category = () => {
@@ -43,6 +43,7 @@ const Category = () => {
                 <SwiperSlide key={index}
                 onClick={() => {
                     dispatch(setSelectedCategorie(categorie))
+                    dispatch(setLoading(true))
                     window.scrollTo({top:1586, behavior: 'smooth'})
                 }}
                 >

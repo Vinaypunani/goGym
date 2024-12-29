@@ -10,7 +10,7 @@ const Navbar = () => {
             justifyContent="space-around"
             alignItems="center"
             gap={{ sm: "50px", xs: "20px" }}
-            sx={{ padding: '10px 20px', backgroundColor: '#f8f9fa' }}
+            sx={{ padding: '10px 20px', backgroundColor: '#f8f9fa'}}
         >
             <Link to="/">
                 <img src={logo} alt="Logo" style={{ width: '80px', height: '80px' }} />
